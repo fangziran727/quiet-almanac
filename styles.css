@@ -248,15 +248,15 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=9");
+  background-image: url("./assets/voice-circle.svg?v=10");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=9");
+  background-image: url("./assets/emoticon.svg?v=10");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=9");
+  background-image: url("./assets/plus-circle.svg?v=10");
   margin-left: -8px;
 }
 
