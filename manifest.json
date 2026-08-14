@@ -1,6 +1,6 @@
 {
-  "name": "SYSU Sports",
-  "short_name": "SYSU Sports",
+  "name": "Quiet Almanac",
+  "short_name": "Quiet",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
