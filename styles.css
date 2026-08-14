@@ -43,6 +43,9 @@ button {
 }
 
 .phone-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: min(100vw, var(--screen-width));
   height: var(--app-height, 100dvh);
   margin: 0;
@@ -252,15 +255,15 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=12");
+  background-image: url("./assets/voice-circle.svg?v=13");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=12");
+  background-image: url("./assets/emoticon.svg?v=13");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=12");
+  background-image: url("./assets/plus-circle.svg?v=13");
   margin-left: -8px;
 }
 
