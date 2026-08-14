@@ -147,6 +147,24 @@
     button.addEventListener("click", showChatScreen);
   });
 
+  function blockPinchZoom() {
+    document.addEventListener("gesturestart", function (event) {
+      event.preventDefault();
+    });
+    document.addEventListener("gesturechange", function (event) {
+      event.preventDefault();
+    });
+    document.addEventListener("gestureend", function (event) {
+      event.preventDefault();
+    });
+    document.addEventListener("touchmove", function (event) {
+      if (event.touches && event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+  }
+
+  blockPinchZoom();
   renderMessages();
 
   if (window.location.hash === "#campus") {
