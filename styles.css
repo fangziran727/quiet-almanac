@@ -253,6 +253,7 @@ button {
 
 .emoji-button {
   background-image: url("./assets/emoticon.svg");
+  margin-right: -7px;
 }
 
 .plus-button {
