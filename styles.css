@@ -248,15 +248,15 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=8");
+  background-image: url("./assets/voice-circle.svg?v=9");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=8");
+  background-image: url("./assets/emoticon.svg?v=9");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=8");
+  background-image: url("./assets/plus-circle.svg?v=9");
   margin-left: -8px;
 }
 
@@ -281,6 +281,11 @@ button {
 .input-field::placeholder {
   color: #a8abb3;
   font-weight: 600;
+}
+
+.input-field:focus::placeholder {
+  color: transparent;
+  opacity: 0;
 }
 
 .campus-screen {
