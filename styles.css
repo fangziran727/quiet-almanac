@@ -248,30 +248,39 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=7");
+  background-image: url("./assets/voice-circle.svg?v=8");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=7");
+  background-image: url("./assets/emoticon.svg?v=8");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=7");
+  background-image: url("./assets/plus-circle.svg?v=8");
   margin-left: -8px;
 }
 
-.input-placeholder {
-  height: 43px;
+.input-field {
+  width: 100%;
   min-width: 0;
-  padding: 8px 12px;
+  height: 43px;
+  padding: 0 12px;
+  border: 0;
   border-radius: 3px;
   background: #ffffff;
-  color: #a8abb3;
+  color: var(--text);
   font-size: 19px;
   font-weight: 600;
-  line-height: 27px;
-  white-space: nowrap;
-  overflow: hidden;
+  font-family: inherit;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  caret-color: #07c160;
+}
+
+.input-field::placeholder {
+  color: #a8abb3;
+  font-weight: 600;
 }
 
 .campus-screen {
