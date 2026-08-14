@@ -248,7 +248,7 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice.png");
+  background-image: url("./assets/voice-ring.svg");
 }
 
 .emoji-button {
@@ -256,7 +256,7 @@ button {
 }
 
 .plus-button {
-  background-image: url("./assets/plus.png");
+  background-image: url("./assets/plus-circle.svg");
 }
 
 .input-placeholder {
