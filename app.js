@@ -176,7 +176,18 @@
     }
   }
 
-  syncAppHeight();
+  var lastAppHeight = null;
+
+  function watchAppHeight() {
+    var vv = window.visualViewport;
+    var h = vv && vv.height ? vv.height : window.innerHeight;
+    if (h !== lastAppHeight) {
+      lastAppHeight = h;
+      syncAppHeight();
+    }
+  }
+
+  watchAppHeight();
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", syncAppHeight);
     window.visualViewport.addEventListener("scroll", syncAppHeight);
@@ -185,10 +196,12 @@
   window.addEventListener("scroll", syncAppHeight, { passive: true });
   document.addEventListener("focusin", function () {
     setTimeout(syncAppHeight, 80);
+    setTimeout(syncAppHeight, 350);
   });
   document.addEventListener("focusout", function () {
     setTimeout(syncAppHeight, 100);
   });
+  setInterval(watchAppHeight, 250);
 
   blockPinchZoom();
   renderMessages();
