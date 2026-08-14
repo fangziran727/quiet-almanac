@@ -55,13 +55,17 @@ button {
   display: flex;
   height: var(--app-height, 100dvh);
   flex-direction: column;
+  padding-top: 54px;
   overflow: hidden;
   background: var(--wechat-bg);
 }
 
 .chat-header {
-  position: relative;
-  z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: min(100vw, var(--screen-width));
   display: grid;
   flex: 0 0 54px;
   height: 54px;
@@ -248,15 +252,15 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=11");
+  background-image: url("./assets/voice-circle.svg?v=12");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=11");
+  background-image: url("./assets/emoticon.svg?v=12");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=11");
+  background-image: url("./assets/plus-circle.svg?v=12");
   margin-left: -8px;
 }
 
