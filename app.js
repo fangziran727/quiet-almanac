@@ -168,7 +168,8 @@
     var vv = window.visualViewport;
     var measured = vv && vv.height ? vv.height : 0;
     var layoutHeight = window.innerHeight;
-    var isTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0);
+    var isTouch = ("ontouchstart" in window) ||
+      (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
     var activeTag = document.activeElement ? document.activeElement.tagName : "";
     if (measured > 0 && measured < layoutHeight) {
       return measured;
