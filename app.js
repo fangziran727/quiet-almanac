@@ -182,8 +182,12 @@
     window.visualViewport.addEventListener("scroll", syncAppHeight);
   }
   window.addEventListener("resize", syncAppHeight);
+  window.addEventListener("scroll", syncAppHeight, { passive: true });
   document.addEventListener("focusin", function () {
     setTimeout(syncAppHeight, 80);
+  });
+  document.addEventListener("focusout", function () {
+    setTimeout(syncAppHeight, 100);
   });
 
   blockPinchZoom();
