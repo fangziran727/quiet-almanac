@@ -164,6 +164,25 @@
     }, { passive: false });
   }
 
+  function syncAppHeight() {
+    var vv = window.visualViewport;
+    var height = vv && vv.height ? vv.height : window.innerHeight;
+    document.documentElement.style.setProperty("--app-height", height + "px");
+    if (window.scrollY > 0 || document.documentElement.scrollTop > 0) {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  syncAppHeight();
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", syncAppHeight);
+    window.visualViewport.addEventListener("scroll", syncAppHeight);
+  }
+  window.addEventListener("resize", syncAppHeight);
+  document.addEventListener("focusin", function () {
+    setTimeout(syncAppHeight, 80);
+  });
+
   blockPinchZoom();
   renderMessages();
 

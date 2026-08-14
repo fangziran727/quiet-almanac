@@ -44,7 +44,7 @@ button {
 
 .phone-shell {
   width: min(100vw, var(--screen-width));
-  height: 100dvh;
+  height: var(--app-height, 100dvh);
   margin: 0;
   background: var(--wechat-bg);
   overflow: hidden;
@@ -53,7 +53,7 @@ button {
 .chat-screen {
   position: relative;
   display: flex;
-  height: 100dvh;
+  height: var(--app-height, 100dvh);
   flex-direction: column;
   overflow: hidden;
   background: var(--wechat-bg);
@@ -248,15 +248,15 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=10");
+  background-image: url("./assets/voice-circle.svg?v=11");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=10");
+  background-image: url("./assets/emoticon.svg?v=11");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=10");
+  background-image: url("./assets/plus-circle.svg?v=11");
   margin-left: -8px;
 }
 
