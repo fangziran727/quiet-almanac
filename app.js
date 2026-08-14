@@ -164,9 +164,25 @@
     }, { passive: false });
   }
 
+  function currentAppHeight() {
+    var vv = window.visualViewport;
+    var measured = vv && vv.height ? vv.height : 0;
+    var layoutHeight = window.innerHeight;
+    var isTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0);
+    var activeTag = document.activeElement ? document.activeElement.tagName : "";
+    if (measured > 0 && measured < layoutHeight) {
+      return measured;
+    }
+    if (isTouch && (activeTag === "INPUT" || activeTag === "TEXTAREA")) {
+      var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
+      return Math.max(200, layoutHeight - estimate);
+    }
+    return layoutHeight;
+  }
+
   function syncAppHeight() {
     var vv = window.visualViewport;
-    var height = vv && vv.height ? vv.height : window.innerHeight;
+    var height = currentAppHeight();
     var top = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
     var rootStyle = document.documentElement.style;
     rootStyle.setProperty("--app-height", height + "px");
@@ -179,8 +195,7 @@
   var lastAppHeight = null;
 
   function watchAppHeight() {
-    var vv = window.visualViewport;
-    var h = vv && vv.height ? vv.height : window.innerHeight;
+    var h = currentAppHeight();
     if (h !== lastAppHeight) {
       lastAppHeight = h;
       syncAppHeight();
@@ -197,6 +212,7 @@
   document.addEventListener("focusin", function () {
     setTimeout(syncAppHeight, 80);
     setTimeout(syncAppHeight, 350);
+    setTimeout(syncAppHeight, 600);
   });
   document.addEventListener("focusout", function () {
     setTimeout(syncAppHeight, 100);
