@@ -248,16 +248,16 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=5");
+  background-image: url("./assets/voice-circle.svg?v=6");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=5");
-  margin-right: -7px;
+  background-image: url("./assets/emoticon.svg?v=6");
+  margin-right: -15px;
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=5");
+  background-image: url("./assets/plus-circle.svg?v=6");
 }
 
 .input-placeholder {
