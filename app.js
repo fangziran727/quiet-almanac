@@ -167,7 +167,10 @@
   function syncAppHeight() {
     var vv = window.visualViewport;
     var height = vv && vv.height ? vv.height : window.innerHeight;
-    document.documentElement.style.setProperty("--app-height", height + "px");
+    var top = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
+    var rootStyle = document.documentElement.style;
+    rootStyle.setProperty("--app-height", height + "px");
+    rootStyle.setProperty("--shell-top", top + "px");
     if (window.scrollY > 0 || document.documentElement.scrollTop > 0) {
       window.scrollTo(0, 0);
     }
