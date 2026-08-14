@@ -21,14 +21,56 @@
     return new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate() + offsetDays);
   }
 
-  function dailyStableTime(date) {
-    var daySerial = Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / MINUTES_PER_DAY);
-    var startMinutes = 9 * 60;
-    var endMinutes = 11 * 60 + 50;
-    var range = endMinutes - startMinutes + 1;
-    var minutes = startMinutes + ((daySerial * 37 + 23) % range);
+  function daySerial(date) {
+    return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / MINUTES_PER_DAY);
+  }
 
-    return pad(Math.floor(minutes / 60)) + ":" + pad(minutes % 60);
+  function pseudoRandom(date, salt) {
+    return (daySerial(date) * 37 + salt * 101 + 23) % 997;
+  }
+
+  function dailySendTimes(date) {
+    var firstMinutes = 9 * 60 + pseudoRandom(date, 1) % 61;
+    var gapMinutes = 20 + pseudoRandom(date, 2) % 101;
+    var secondMinutes = firstMinutes + gapMinutes;
+
+    return [
+      pad(Math.floor(firstMinutes / 60)) + ":" + pad(firstMinutes % 60),
+      pad(Math.floor(secondMinutes / 60)) + ":" + pad(secondMinutes % 60)
+    ];
+  }
+
+  var WEEKDAY_NAMES = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+  function daysBetween(messageDate, today) {
+    var startOfDay = function (date) {
+      return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+    };
+    return Math.round((startOfDay(today) - startOfDay(messageDate)) / MINUTES_PER_DAY);
+  }
+
+  function monthDayLabel(date, today) {
+    var label = (date.getMonth() + 1) + "月" + date.getDate() + "日";
+    if (date.getFullYear() !== today.getFullYear()) {
+      label = date.getFullYear() + "年" + label;
+    }
+    return label;
+  }
+
+  function chatTimeLabel(messageDate, sendTime) {
+    var today = new Date();
+    var daysAgo = daysBetween(messageDate, today);
+
+    if (daysAgo <= 0) {
+      return sendTime;
+    }
+    if (daysAgo === 1) {
+      return "昨天 " + sendTime;
+    }
+    if (daysAgo <= 6) {
+      return WEEKDAY_NAMES[messageDate.getDay()] + " " + sendTime;
+    }
+    return monthDayLabel(messageDate, today) + " " + sendTime;
   }
 
   function appendTimeLabel(time) {
@@ -43,7 +85,7 @@
     var card = fragment.querySelector(".message-card");
 
     fragment.querySelector(".venue").textContent = message.venue;
-    fragment.querySelector(".reservation-time").textContent = formatDate(message.date) + " " + message.time;
+    fragment.querySelector(".reservation-time").textContent = formatDate(message.date) + " " + message.reservationTime;
     card.setAttribute("role", "button");
     card.setAttribute("tabindex", "0");
     card.addEventListener("click", showCampusScreen);
@@ -57,9 +99,10 @@
   }
 
   function dailyMessages(date) {
+    var sendTimes = dailySendTimes(date);
     return [
-      { venue: "深圳校区游泳池-场地1", date: date, time: "16:30" },
-      { venue: "深圳校区健身房-场地1", date: date, time: "16:00" }
+      { venue: "深圳校区游泳池-场地1", date: date, reservationTime: "16:30", sentAt: sendTimes[0] },
+      { venue: "深圳校区健身房-场地1", date: date, reservationTime: "16:00", sentAt: sendTimes[1] }
     ];
   }
 
@@ -67,17 +110,19 @@
     var today = new Date();
     var todayOnly = shiftedDate(today, 0);
     var messageGroups = [
-      { label: "10:08", date: shiftedDate(today, -3) },
-      { label: "12:01", date: shiftedDate(today, -2) },
-      { label: "12:50", date: shiftedDate(today, -1) },
-      { label: dailyStableTime(todayOnly), date: todayOnly }
+      shiftedDate(today, -3),
+      shiftedDate(today, -2),
+      shiftedDate(today, -1),
+      todayOnly
     ];
 
     cardsRoot.textContent = "";
 
-    messageGroups.forEach(function (group) {
-      appendTimeLabel(group.label);
-      dailyMessages(group.date).forEach(appendMessage);
+    messageGroups.forEach(function (date) {
+      dailyMessages(date).forEach(function (message) {
+        appendTimeLabel(chatTimeLabel(message.date, message.sentAt));
+        appendMessage(message);
+      });
     });
   }
 
