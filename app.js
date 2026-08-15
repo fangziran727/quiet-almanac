@@ -298,17 +298,27 @@
     debugEl.style.cssText = "position:fixed;top:60px;left:8px;z-index:99999;padding:6px 8px;border-radius:4px;background:rgba(0,0,0,.78);color:#fff;font:11px/1.4 monospace;pointer-events:none;";
     debugEl.textContent = "debug";
     document.body.appendChild(debugEl);
+    var minVvTop = Infinity;
+    var maxVvTop = -Infinity;
+    var minHdrTop = Infinity;
+    var maxHdrTop = -Infinity;
     function updateDebug() {
       var vv = window.visualViewport;
       var header = document.querySelector(".chat-header");
       var shell = document.querySelector(".phone-shell");
       var hb = header ? header.getBoundingClientRect() : null;
       var sb = shell ? shell.getBoundingClientRect() : null;
+      var vvTop = vv && typeof vv.offsetTop === "number" ? Math.round(vv.offsetTop) : 0;
+      var hdrTop = hb ? Math.round(hb.top) : -1;
+      if (vvTop < minVvTop) minVvTop = vvTop;
+      if (vvTop > maxVvTop) maxVvTop = vvTop;
+      if (hdrTop < minHdrTop) minHdrTop = hdrTop;
+      if (hdrTop > maxHdrTop) maxHdrTop = hdrTop;
       debugEl.textContent = [
         "innerH=" + Math.round(window.innerHeight),
         "vvH=" + Math.round(vv ? vv.height : 0),
-        "vvTop=" + Math.round(vv ? vv.offsetTop : 0),
-        "hdrTop=" + Math.round(hb ? hb.top : -1),
+        "vvTop=" + vvTop + "(" + minVvTop + "-" + maxVvTop + ")",
+        "hdrTop=" + hdrTop + "(" + minHdrTop + "-" + maxHdrTop + ")",
         "shellTop=" + Math.round(sb ? sb.top : -1),
         "shellH=" + Math.round(sb ? sb.height : -1)
       ].join(" | ");
