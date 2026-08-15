@@ -264,7 +264,7 @@ button {
   gap: 8px;
   padding: 9px 14px max(9px, env(safe-area-inset-bottom));
   border-top: 1px solid var(--hairline);
-  background: #f5f6fa;
+  background: var(--wechat-bg);
 }
 
 .voice-button,
@@ -323,7 +323,7 @@ button {
 
 .input-panels {
   flex: 0 0 auto;
-  background: #f5f6fa;
+  background: var(--wechat-bg);
 }
 
 .emoji-panel,
