@@ -230,6 +230,15 @@
   var morePanel = document.querySelector(".more-panel");
   var inputField = document.querySelector(".input-field");
 
+  if (inputField) {
+    inputField.addEventListener("touchstart", function () {
+      if (window.scrollY > 0 || document.documentElement.scrollTop > 0) {
+        window.scrollTo(0, 0);
+      }
+      startViewportRaf();
+    }, { passive: true });
+  }
+
   function closeInputPanels() {
     if (emojiPanel) emojiPanel.classList.add("is-hidden");
     if (morePanel) morePanel.classList.add("is-hidden");
