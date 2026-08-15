@@ -279,6 +279,18 @@
     inputField.addEventListener("click", closeInputPanels);
   }
 
+  var messageArea = document.querySelector(".message-area");
+  if (messageArea) {
+    messageArea.addEventListener("click", function (event) {
+      var target = event.target;
+      if (target && target.closest && target.closest(".message-card")) return;
+      closeInputPanels();
+      if (document.activeElement === inputField && inputField) {
+        inputField.blur();
+      }
+    });
+  }
+
   var emojiGrid = document.getElementById("emojiGrid");
   if (emojiGrid) {
     var emojiSet = [
