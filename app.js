@@ -220,6 +220,69 @@
   });
   setInterval(watchAppHeight, 250);
 
+  var emojiPanel = document.querySelector(".emoji-panel");
+  var morePanel = document.querySelector(".more-panel");
+  var inputField = document.querySelector(".input-field");
+
+  function closeInputPanels() {
+    if (emojiPanel) emojiPanel.classList.add("is-hidden");
+    if (morePanel) morePanel.classList.add("is-hidden");
+  }
+
+  function openInputPanel(kind) {
+    var target = kind === "emoji" ? emojiPanel : morePanel;
+    var other = kind === "emoji" ? morePanel : emojiPanel;
+    if (!target) return;
+    var opening = target.classList.contains("is-hidden");
+    if (other) other.classList.add("is-hidden");
+    target.classList.toggle("is-hidden", !opening);
+    if (opening) {
+      if (document.activeElement === inputField && inputField) {
+        inputField.blur();
+      }
+    } else if (inputField) {
+      inputField.focus();
+    }
+  }
+
+  var emojiButton = document.querySelector(".emoji-button");
+  var plusButton = document.querySelector(".plus-button");
+  var voiceButton = document.querySelector(".voice-button");
+  if (emojiButton) emojiButton.addEventListener("click", function () { openInputPanel("emoji"); });
+  if (plusButton) plusButton.addEventListener("click", function () { openInputPanel("more"); });
+  if (voiceButton) voiceButton.addEventListener("click", closeInputPanels);
+
+  document.addEventListener("focusin", function (event) {
+    if (event.target === inputField) {
+      closeInputPanels();
+    }
+  });
+
+  var emojiGrid = document.getElementById("emojiGrid");
+  if (emojiGrid) {
+    var emojiSet = [
+      "😀","😁","😂","🤣","😊","😇","🙂","😉",
+      "😍","🥰","😘","😜","🤪","😎","🤩","🥳",
+      "😢","😭","😤","😡","🤯","😱","🥶","🤒",
+      "👍","👎","👏","🙏","💪","🤝","✌️","🤞",
+      "❤️","🧡","💛","💚","💙","💜","🖤","💯",
+      "🎉","🎊","🔥","✨","⭐","🌹","🍀","🐶"
+    ];
+    emojiSet.forEach(function (emoji) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.textContent = emoji;
+      button.setAttribute("aria-label", "表情 " + emoji);
+      button.addEventListener("click", function () {
+        if (inputField) {
+          inputField.value += emoji;
+          inputField.focus();
+        }
+      });
+      emojiGrid.appendChild(button);
+    });
+  }
+
   blockPinchZoom();
   renderMessages();
 

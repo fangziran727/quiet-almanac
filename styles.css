@@ -255,15 +255,15 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=20");
+  background-image: url("./assets/voice-circle.svg?v=21");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=20");
+  background-image: url("./assets/emoticon.svg?v=21");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=20");
+  background-image: url("./assets/plus-circle.svg?v=21");
   margin-left: -8px;
 }
 
@@ -293,6 +293,85 @@ button {
 .input-field:focus::placeholder {
   color: transparent;
   opacity: 0;
+}
+
+.input-panels {
+  flex: 0 0 auto;
+  background: #f7f8fa;
+  border-top: 1px solid var(--hairline);
+}
+
+.emoji-panel,
+.more-panel {
+  height: 236px;
+  overflow-y: auto;
+  background: #f7f8fa;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.emoji-panel {
+  padding: 10px 8px;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+
+.emoji-grid button {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.emoji-grid button:active {
+  background: #eceef2;
+}
+
+.more-panel {
+  padding: 18px 12px 14px;
+}
+
+.more-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 8px;
+}
+
+.more-item {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #3d4046;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.more-icon {
+  display: flex;
+  width: 54px;
+  height: 54px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #4a4d53;
+}
+
+.more-icon svg {
+  width: 30px;
+  height: 30px;
 }
 
 .campus-screen {
