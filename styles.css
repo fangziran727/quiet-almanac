@@ -262,7 +262,7 @@ button {
   grid-template-columns: 31px minmax(0, 1fr) 31px 31px;
   align-items: center;
   gap: 8px;
-  padding: 8px 12px max(9px, env(safe-area-inset-bottom)) 9px;
+  padding: 8px 12px max(0px, calc(env(safe-area-inset-bottom) - 20px)) 9px;
   border-top: 1px solid var(--hairline);
   background: #f5f6fa;
 }
