@@ -63,7 +63,7 @@ button {
   height: 100%;
   flex-direction: column;
   padding-top: 54px;
-  padding-bottom: var(--keyboard-inset, 0px);
+  padding-bottom: calc(var(--keyboard-inset, 0px) + 4px);
   overflow: hidden;
   background: var(--wechat-bg);
 }
