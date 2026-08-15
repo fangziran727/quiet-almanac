@@ -217,6 +217,11 @@
   }
   window.addEventListener("resize", syncViewport);
   document.addEventListener("focusin", function () {
+    var active = document.activeElement;
+    if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) {
+      scrollMessagesToBottom();
+      setTimeout(scrollMessagesToBottom, 350);
+    }
     startViewportRaf();
     setTimeout(syncViewport, 250);
   });
@@ -242,6 +247,8 @@
       if (event.cancelable) {
         event.preventDefault();
       }
+      scrollMessagesToBottom();
+      setTimeout(scrollMessagesToBottom, 350);
       startViewportRaf();
       inputField.focus({ preventScroll: true });
     }, { passive: false });
@@ -260,6 +267,8 @@
     if (other) other.classList.remove("panel-open");
     target.classList.toggle("panel-open", opening);
     if (opening) {
+      scrollMessagesToBottom();
+      setTimeout(scrollMessagesToBottom, 350);
       if (document.activeElement === inputField && inputField) {
         inputField.blur();
       }
@@ -277,6 +286,16 @@
 
   if (inputField) {
     inputField.addEventListener("click", closeInputPanels);
+  }
+
+  function scrollMessagesToBottom() {
+    var area = document.querySelector(".message-area");
+    var cards = document.querySelector(".cards");
+    if (cards && cards.scrollIntoView) {
+      cards.scrollIntoView({ block: "end", behavior: "auto" });
+    } else if (area) {
+      area.scrollTop = area.scrollHeight;
+    }
   }
 
   var messageArea = document.querySelector(".message-area");
