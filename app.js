@@ -281,6 +281,24 @@
 
   var messageArea = document.querySelector(".message-area");
   if (messageArea) {
+    var messageTouchStarted = false;
+    messageArea.addEventListener("touchstart", function () {
+      messageTouchStarted = true;
+    }, { passive: true });
+    messageArea.addEventListener("touchmove", function () {
+      if (!messageTouchStarted) return;
+      messageTouchStarted = false;
+      closeInputPanels();
+      if (document.activeElement === inputField && inputField) {
+        inputField.blur();
+      }
+    }, { passive: true });
+    messageArea.addEventListener("touchend", function () {
+      messageTouchStarted = false;
+    }, { passive: true });
+    messageArea.addEventListener("touchcancel", function () {
+      messageTouchStarted = false;
+    }, { passive: true });
     messageArea.addEventListener("click", function (event) {
       var target = event.target;
       if (target && target.closest && target.closest(".message-card")) return;
