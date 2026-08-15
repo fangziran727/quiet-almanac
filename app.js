@@ -212,6 +212,19 @@
   }
   window.addEventListener("resize", syncViewport);
   document.addEventListener("focusin", function () {
+    var active = document.activeElement;
+    var isTextInput = active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
+    var isTouch = ("ontouchstart" in window) ||
+      (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
+    var vv = window.visualViewport;
+    var layoutHeight = window.innerHeight;
+    var alreadyShrunk = vv && vv.height > 0 && vv.height < layoutHeight;
+    if (isTextInput && isTouch && !alreadyShrunk) {
+      var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
+      var estimatedHeight = Math.max(200, layoutHeight - estimate);
+      lastAppHeight = estimatedHeight;
+      document.documentElement.style.setProperty("--app-height", estimatedHeight + "px");
+    }
     setTimeout(syncViewport, 250);
   });
   document.addEventListener("focusout", function () {
