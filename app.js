@@ -279,6 +279,31 @@
     });
   }
 
+  if (/[?&]debug=1/.test(window.location.search)) {
+    var debugEl = document.createElement("div");
+    debugEl.style.cssText = "position:fixed;top:60px;left:8px;z-index:99999;padding:6px 8px;border-radius:4px;background:rgba(0,0,0,.78);color:#fff;font:11px/1.4 monospace;pointer-events:none;";
+    debugEl.textContent = "debug";
+    document.body.appendChild(debugEl);
+    function updateDebug() {
+      var vv = window.visualViewport;
+      var header = document.querySelector(".chat-header");
+      var shell = document.querySelector(".phone-shell");
+      var hb = header ? header.getBoundingClientRect() : null;
+      var sb = shell ? shell.getBoundingClientRect() : null;
+      debugEl.textContent = [
+        "innerH=" + Math.round(window.innerHeight),
+        "vvH=" + Math.round(vv ? vv.height : 0),
+        "vvTop=" + Math.round(vv ? vv.offsetTop : 0),
+        "hdrTop=" + Math.round(hb ? hb.top : -1),
+        "shellTop=" + Math.round(sb ? sb.top : -1),
+        "shellH=" + Math.round(sb ? sb.height : -1)
+      ].join(" | ");
+    }
+    setInterval(updateDebug, 150);
+    document.addEventListener("focusin", function () { setTimeout(updateDebug, 0); });
+    document.addEventListener("focusout", function () { setTimeout(updateDebug, 0); });
+  }
+
   blockPinchZoom();
   renderMessages();
 
