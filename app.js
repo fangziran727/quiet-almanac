@@ -241,7 +241,7 @@
         inputField.blur();
       }
     } else if (inputField) {
-      inputField.focus();
+      inputField.focus({ preventScroll: true });
     }
   }
 
@@ -274,7 +274,7 @@
       button.addEventListener("click", function () {
         if (inputField) {
           inputField.value += emoji;
-          inputField.focus();
+          inputField.focus({ preventScroll: true });
         }
       });
       emojiGrid.appendChild(button);
