@@ -219,8 +219,7 @@
   document.addEventListener("focusin", function () {
     var active = document.activeElement;
     if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) {
-      scrollMessagesToBottom();
-      setTimeout(scrollMessagesToBottom, 350);
+      scheduleScrollToBottom();
     }
     startViewportRaf();
     setTimeout(syncViewport, 250);
@@ -247,8 +246,7 @@
       if (event.cancelable) {
         event.preventDefault();
       }
-      scrollMessagesToBottom();
-      setTimeout(scrollMessagesToBottom, 350);
+      scheduleScrollToBottom();
       startViewportRaf();
       inputField.focus({ preventScroll: true });
     }, { passive: false });
@@ -267,8 +265,7 @@
     if (other) other.classList.remove("panel-open");
     target.classList.toggle("panel-open", opening);
     if (opening) {
-      scrollMessagesToBottom();
-      setTimeout(scrollMessagesToBottom, 350);
+      scheduleScrollToBottom();
       if (document.activeElement === inputField && inputField) {
         inputField.blur();
       }
@@ -290,12 +287,25 @@
 
   function scrollMessagesToBottom() {
     var area = document.querySelector(".message-area");
-    var cards = document.querySelector(".cards");
-    if (cards && cards.scrollIntoView) {
-      cards.scrollIntoView({ block: "end", behavior: "auto" });
-    } else if (area) {
-      area.scrollTop = area.scrollHeight;
+    if (!area) return;
+    var start = area.scrollTop;
+    var startTime = null;
+    var duration = 280;
+    function step(now) {
+      if (startTime === null) startTime = now;
+      var progress = Math.min(1, (now - startTime) / duration);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var target = Math.max(0, area.scrollHeight - area.clientHeight);
+      area.scrollTop = start + (target - start) * eased;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
     }
+    requestAnimationFrame(step);
+  }
+
+  function scheduleScrollToBottom() {
+    scrollMessagesToBottom();
   }
 
   var messageArea = document.querySelector(".message-area");
