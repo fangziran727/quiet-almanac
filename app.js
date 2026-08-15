@@ -202,6 +202,11 @@
     }
   }
 
+  function resetKeyboardInset() {
+    lastKeyboardInset = 0;
+    document.documentElement.style.setProperty("--keyboard-inset", "0px");
+  }
+
   function syncViewport() {
     var inset = currentKeyboardInset();
     var rootStyle = document.documentElement.style;
@@ -225,6 +230,7 @@
     setTimeout(syncViewport, 250);
   });
   document.addEventListener("focusout", function () {
+    resetKeyboardInset();
     setTimeout(syncViewport, 100);
     setTimeout(stopViewportRaf, 120);
   });
@@ -321,6 +327,7 @@
       if (document.activeElement === inputField && inputField) {
         inputField.blur();
       }
+      resetKeyboardInset();
     }, { passive: true });
     messageArea.addEventListener("touchend", function () {
       messageTouchStarted = false;
@@ -335,6 +342,7 @@
       if (document.activeElement === inputField && inputField) {
         inputField.blur();
       }
+      resetKeyboardInset();
     });
   }
 
