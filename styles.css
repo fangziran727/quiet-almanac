@@ -255,15 +255,15 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=19");
+  background-image: url("./assets/voice-circle.svg?v=20");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=19");
+  background-image: url("./assets/emoticon.svg?v=20");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=19");
+  background-image: url("./assets/plus-circle.svg?v=20");
   margin-left: -8px;
 }
 
