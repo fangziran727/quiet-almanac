@@ -168,6 +168,9 @@
     var vv = window.visualViewport;
     var measured = vv && vv.height ? vv.height : 0;
     var layoutHeight = window.innerHeight;
+    if (inputPrelifted && preliftHeight && measured > 0 && measured >= layoutHeight) {
+      return preliftHeight;
+    }
     if (measured > 0) {
       return measured;
     }
@@ -191,6 +194,8 @@
   var lastAppHeight = null;
   var lastShellTop = null;
   var viewportRafId = null;
+  var inputPrelifted = false;
+  var preliftHeight = null;
 
   function startViewportRaf() {
     if (viewportRafId !== null) return;
@@ -242,6 +247,8 @@
     if (isTextInput && isTouch && !alreadyShrunk) {
       var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
       var estimatedHeight = Math.max(200, layoutHeight - estimate);
+      inputPrelifted = true;
+      preliftHeight = estimatedHeight;
       lastAppHeight = estimatedHeight;
       document.documentElement.style.setProperty("--app-height", estimatedHeight + "px");
     }
@@ -249,6 +256,8 @@
     setTimeout(syncViewport, 250);
   });
   document.addEventListener("focusout", function () {
+    inputPrelifted = false;
+    preliftHeight = null;
     setTimeout(syncViewport, 100);
     setTimeout(stopViewportRaf, 120);
   });
@@ -262,10 +271,14 @@
     var isTouch = ("ontouchstart" in window) ||
       (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
     if (!isTouch) return;
+    var vv = window.visualViewport;
+    if (vv && vv.height > 0 && vv.height < window.innerHeight) return;
     var layoutHeight = window.innerHeight;
     var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
     var estimatedHeight = Math.max(200, layoutHeight - estimate);
     var rootStyle = document.documentElement.style;
+    inputPrelifted = true;
+    preliftHeight = estimatedHeight;
     lastAppHeight = estimatedHeight;
     lastShellTop = 0;
     rootStyle.setProperty("--app-height", estimatedHeight + "px");
