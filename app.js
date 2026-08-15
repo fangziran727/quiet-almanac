@@ -190,6 +190,23 @@
 
   var lastAppHeight = null;
   var lastShellTop = null;
+  var viewportRafId = null;
+
+  function startViewportRaf() {
+    if (viewportRafId !== null) return;
+    function step() {
+      syncViewport();
+      viewportRafId = requestAnimationFrame(step);
+    }
+    viewportRafId = requestAnimationFrame(step);
+  }
+
+  function stopViewportRaf() {
+    if (viewportRafId !== null) {
+      cancelAnimationFrame(viewportRafId);
+      viewportRafId = null;
+    }
+  }
 
   function syncViewport() {
     var height = Math.round(currentAppHeight());
@@ -225,10 +242,12 @@
       lastAppHeight = estimatedHeight;
       document.documentElement.style.setProperty("--app-height", estimatedHeight + "px");
     }
+    startViewportRaf();
     setTimeout(syncViewport, 250);
   });
   document.addEventListener("focusout", function () {
     setTimeout(syncViewport, 100);
+    setTimeout(stopViewportRaf, 120);
   });
   setInterval(syncViewport, 250);
 
