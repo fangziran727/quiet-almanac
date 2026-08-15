@@ -252,11 +252,9 @@
   if (plusButton) plusButton.addEventListener("click", function () { openInputPanel("more"); });
   if (voiceButton) voiceButton.addEventListener("click", closeInputPanels);
 
-  document.addEventListener("focusin", function (event) {
-    if (event.target === inputField) {
-      closeInputPanels();
-    }
-  });
+  if (inputField) {
+    inputField.addEventListener("click", closeInputPanels);
+  }
 
   var emojiGrid = document.getElementById("emojiGrid");
   if (emojiGrid) {
