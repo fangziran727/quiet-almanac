@@ -106,11 +106,10 @@ button {
   justify-self: end;
   width: 48px;
   height: 54px;
-  padding-right: 15px;
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  line-height: 1;
+  padding-right: 14px;
+  font-size: 0;
+  line-height: 0;
+  background: url("./assets/more_icon.svg?v=24") center right 14px / 18px 18px no-repeat;
 }
 
 .message-area {
@@ -232,12 +231,12 @@ button {
   display: grid;
   width: 100%;
   height: 74px;
-  grid-template-columns: 38px 1fr 35px 35px;
+  grid-template-columns: 31px minmax(0, 1fr) 31px 31px;
   align-items: center;
-  gap: 13px;
-  padding: 9px 14px max(9px, env(safe-area-inset-bottom));
+  gap: 8px;
+  padding: 8px 12px max(9px, env(safe-area-inset-bottom)) 9px;
   border-top: 1px solid var(--hairline);
-  background: #f4f5f9;
+  background: #f5f6fa;
 }
 
 .voice-button,
@@ -255,29 +254,28 @@ button {
 }
 
 .voice-button {
-  background-image: url("./assets/voice-circle.svg?v=22");
+  background-image: url("./assets/voice-circle.svg?v=25");
 }
 
 .emoji-button {
-  background-image: url("./assets/emoticon.svg?v=22");
+  background-image: url("./assets/emoticon.svg?v=25");
 }
 
 .plus-button {
-  background-image: url("./assets/plus-circle.svg?v=22");
-  margin-left: -8px;
+  background-image: url("./assets/plus-circle.svg?v=25");
 }
 
 .input-field {
   width: 100%;
   min-width: 0;
-  height: 43px;
-  padding: 0 12px;
+  height: 38px;
+  padding: 0 12px 0 13px;
   border: 0;
-  border-radius: 3px;
+  border-radius: 8px;
   background: #ffffff;
   color: var(--text);
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
   font-family: inherit;
   outline: none;
   -webkit-appearance: none;
@@ -287,7 +285,7 @@ button {
 
 .input-field::placeholder {
   color: #a8abb3;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .input-field:focus::placeholder {
@@ -297,15 +295,15 @@ button {
 
 .input-panels {
   flex: 0 0 auto;
-  background: #f7f8fa;
-  border-top: 1px solid var(--hairline);
+  background: #f5f6fa;
+  border-top: 1px solid #dde0e6;
 }
 
 .emoji-panel,
 .more-panel {
   height: 236px;
   overflow-y: auto;
-  background: #f7f8fa;
+  background: #f5f6fa;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
@@ -336,13 +334,15 @@ button {
 }
 
 .more-panel {
-  padding: 18px 12px 14px;
+  min-height: 350px;
+  padding: 22px 18px calc(18px + env(safe-area-inset-bottom));
 }
 
 .more-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px 8px;
+  gap: 16px 10px;
+  align-content: start;
 }
 
 .more-item {
@@ -350,28 +350,35 @@ button {
   min-width: 0;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: #3d4046;
-  font-size: 13px;
+  gap: 10px;
+  color: #666a72;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1;
 }
 
 .more-icon {
   display: flex;
-  width: 54px;
-  height: 54px;
+  width: 68px;
+  height: 68px;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
+  border-radius: 16px;
   background: #ffffff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  color: #4a4d53;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  color: #4b4f55;
 }
 
 .more-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
+}
+
+.more-icon img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
 }
 
 .campus-screen {
@@ -445,11 +452,10 @@ button {
 
 .campus-more {
   justify-self: end;
-  padding-right: 15px;
-  font-size: 18px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  line-height: 1;
+  padding-right: 14px;
+  font-size: 0;
+  line-height: 0;
+  background: url("./assets/more_icon.svg?v=24") center right 14px / 18px 18px no-repeat;
 }
 
 .sysu-brand {
