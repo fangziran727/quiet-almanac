@@ -323,7 +323,8 @@ button {
 
 .input-panels {
   flex: 0 0 auto;
-  background: var(--wechat-bg);
+  min-height: 0;
+  background: transparent;
 }
 
 .emoji-panel,
