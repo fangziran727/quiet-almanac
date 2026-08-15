@@ -181,20 +181,34 @@
     return layoutHeight;
   }
 
+  function currentViewportTop() {
+    var vv = window.visualViewport;
+    return vv && typeof vv.offsetTop === "number" && vv.offsetTop > 0
+      ? Math.round(vv.offsetTop)
+      : 0;
+  }
+
   var lastAppHeight = null;
+  var lastShellTop = null;
 
   function syncViewport() {
     var height = Math.round(currentAppHeight());
+    var top = currentViewportTop();
     var rootStyle = document.documentElement.style;
     if (height !== lastAppHeight) {
       lastAppHeight = height;
       rootStyle.setProperty("--app-height", height + "px");
+    }
+    if (top !== lastShellTop) {
+      lastShellTop = top;
+      rootStyle.setProperty("--shell-top", top + "px");
     }
   }
 
   syncViewport();
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", syncViewport);
+    window.visualViewport.addEventListener("scroll", syncViewport);
   }
   window.addEventListener("resize", syncViewport);
   document.addEventListener("focusin", function () {
