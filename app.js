@@ -195,6 +195,9 @@
   function startViewportRaf() {
     if (viewportRafId !== null) return;
     function step() {
+      if (window.scrollY > 0 || document.documentElement.scrollTop > 0) {
+        window.scrollTo(0, 0);
+      }
       syncViewport();
       viewportRafId = requestAnimationFrame(step);
     }
@@ -254,6 +257,24 @@
   var emojiPanel = document.querySelector(".emoji-panel");
   var morePanel = document.querySelector(".more-panel");
   var inputField = document.querySelector(".input-field");
+
+  function preliftInput() {
+    var isTouch = ("ontouchstart" in window) ||
+      (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
+    if (!isTouch) return;
+    var layoutHeight = window.innerHeight;
+    var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
+    var estimatedHeight = Math.max(200, layoutHeight - estimate);
+    var rootStyle = document.documentElement.style;
+    lastAppHeight = estimatedHeight;
+    lastShellTop = 0;
+    rootStyle.setProperty("--app-height", estimatedHeight + "px");
+    rootStyle.setProperty("--shell-top", "0px");
+  }
+
+  if (inputField) {
+    inputField.addEventListener("touchstart", preliftInput, { passive: true });
+  }
 
   function closeInputPanels() {
     if (emojiPanel) emojiPanel.classList.add("is-hidden");
