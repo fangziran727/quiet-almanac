@@ -168,7 +168,7 @@
     var vv = window.visualViewport;
     var measured = vv && vv.height ? vv.height : 0;
     var layoutHeight = window.innerHeight;
-    if (measured > 0 && measured < layoutHeight) {
+    if (measured > 0) {
       return measured;
     }
     var isTouch = ("ontouchstart" in window) ||
@@ -212,12 +212,10 @@
   }
   window.addEventListener("resize", syncViewport);
   document.addEventListener("focusin", function () {
-    setTimeout(syncViewport, 150);
-    setTimeout(syncViewport, 450);
+    setTimeout(syncViewport, 250);
   });
   document.addEventListener("focusout", function () {
-    setTimeout(syncViewport, 80);
-    setTimeout(syncViewport, 300);
+    setTimeout(syncViewport, 100);
   });
   setInterval(syncViewport, 250);
 
