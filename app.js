@@ -231,12 +231,20 @@
   var inputField = document.querySelector(".input-field");
 
   if (inputField) {
-    inputField.addEventListener("touchstart", function () {
-      if (window.scrollY > 0 || document.documentElement.scrollTop > 0) {
-        window.scrollTo(0, 0);
+    inputField.addEventListener("touchstart", function (event) {
+      var isTouch = ("ontouchstart" in window) ||
+        (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
+      if (!isTouch) return;
+      var layoutHeight = window.innerHeight;
+      var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
+      lastKeyboardInset = estimate;
+      document.documentElement.style.setProperty("--keyboard-inset", estimate + "px");
+      if (event.cancelable) {
+        event.preventDefault();
       }
       startViewportRaf();
-    }, { passive: true });
+      inputField.focus({ preventScroll: true });
+    }, { passive: false });
   }
 
   function closeInputPanels() {
