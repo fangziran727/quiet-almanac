@@ -164,41 +164,62 @@
     }, { passive: false });
   }
 
-  function currentKeyboardInset() {
+  function currentAppHeight() {
     var vv = window.visualViewport;
     var measured = vv && vv.height ? vv.height : 0;
     var layoutHeight = window.innerHeight;
     if (measured > 0 && measured < layoutHeight) {
-      return Math.round(layoutHeight - measured);
+      return measured;
     }
     var isTouch = ("ontouchstart" in window) ||
       (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
     var activeTag = document.activeElement ? document.activeElement.tagName : "";
     if (isTouch && (activeTag === "INPUT" || activeTag === "TEXTAREA")) {
-      return Math.round(Math.min(layoutHeight * 0.45, 420));
+      var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
+      return Math.max(200, layoutHeight - estimate);
     }
-    return 0;
+    return layoutHeight;
   }
 
-  function syncKeyboardInset() {
-    var inset = currentKeyboardInset();
-    document.documentElement.style.setProperty("--keyboard-inset", inset + "px");
+  function currentViewportTop() {
+    var vv = window.visualViewport;
+    return vv && typeof vv.offsetTop === "number" && vv.offsetTop > 0
+      ? Math.round(vv.offsetTop)
+      : 0;
   }
 
-  syncKeyboardInset();
+  var lastAppHeight = null;
+  var lastShellTop = null;
+
+  function syncViewport() {
+    var height = Math.round(currentAppHeight());
+    var top = currentViewportTop();
+    var rootStyle = document.documentElement.style;
+    if (height !== lastAppHeight) {
+      lastAppHeight = height;
+      rootStyle.setProperty("--app-height", height + "px");
+    }
+    if (top !== lastShellTop) {
+      lastShellTop = top;
+      rootStyle.setProperty("--shell-top", top + "px");
+    }
+  }
+
+  syncViewport();
   if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", syncKeyboardInset);
+    window.visualViewport.addEventListener("resize", syncViewport);
+    window.visualViewport.addEventListener("scroll", syncViewport);
   }
-  window.addEventListener("resize", syncKeyboardInset);
+  window.addEventListener("resize", syncViewport);
   document.addEventListener("focusin", function () {
-    setTimeout(syncKeyboardInset, 120);
-    setTimeout(syncKeyboardInset, 450);
+    setTimeout(syncViewport, 150);
+    setTimeout(syncViewport, 450);
   });
   document.addEventListener("focusout", function () {
-    setTimeout(syncKeyboardInset, 80);
-    setTimeout(syncKeyboardInset, 300);
+    setTimeout(syncViewport, 80);
+    setTimeout(syncViewport, 300);
   });
-  setInterval(syncKeyboardInset, 300);
+  setInterval(syncViewport, 250);
 
   var emojiPanel = document.querySelector(".emoji-panel");
   var morePanel = document.querySelector(".more-panel");
