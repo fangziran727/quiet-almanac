@@ -47,10 +47,11 @@ button {
 
 .phone-shell {
   position: fixed;
-  top: var(--shell-top, 0px);
+  top: 0;
+  bottom: 0;
   left: 0;
   width: min(100vw, var(--screen-width));
-  height: var(--app-height, 100dvh);
+  height: auto;
   margin: 0;
   background: var(--wechat-bg);
   overflow: hidden;
@@ -59,16 +60,17 @@ button {
 .chat-screen {
   position: relative;
   display: flex;
-  height: var(--app-height, 100dvh);
+  height: 100%;
   flex-direction: column;
   padding-top: 54px;
+  padding-bottom: var(--keyboard-inset, 0px);
   overflow: hidden;
   background: var(--wechat-bg);
 }
 
 .chat-header {
   position: fixed;
-  top: var(--shell-top, 0px);
+  top: 0;
   left: 0;
   z-index: 100;
   width: min(100vw, var(--screen-width));

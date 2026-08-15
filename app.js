@@ -164,38 +164,24 @@
     }, { passive: false });
   }
 
-  function currentAppHeight() {
+  function currentKeyboardInset() {
     var vv = window.visualViewport;
     var measured = vv && vv.height ? vv.height : 0;
     var layoutHeight = window.innerHeight;
-    if (inputPrelifted && preliftHeight && measured > 0 && measured >= layoutHeight) {
-      return preliftHeight;
-    }
-    if (measured > 0) {
-      return measured;
+    if (measured > 0 && measured < layoutHeight) {
+      return Math.round(layoutHeight - measured);
     }
     var isTouch = ("ontouchstart" in window) ||
       (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
     var activeTag = document.activeElement ? document.activeElement.tagName : "";
     if (isTouch && (activeTag === "INPUT" || activeTag === "TEXTAREA")) {
-      var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
-      return Math.max(200, layoutHeight - estimate);
+      return Math.round(Math.min(layoutHeight * 0.45, 420));
     }
-    return layoutHeight;
+    return 0;
   }
 
-  function currentViewportTop() {
-    var vv = window.visualViewport;
-    return vv && typeof vv.offsetTop === "number" && vv.offsetTop > 0
-      ? Math.round(vv.offsetTop)
-      : 0;
-  }
-
-  var lastAppHeight = null;
-  var lastShellTop = null;
+  var lastKeyboardInset = null;
   var viewportRafId = null;
-  var inputPrelifted = false;
-  var preliftHeight = null;
 
   function startViewportRaf() {
     if (viewportRafId !== null) return;
@@ -217,47 +203,24 @@
   }
 
   function syncViewport() {
-    var height = Math.round(currentAppHeight());
-    var top = currentViewportTop();
+    var inset = currentKeyboardInset();
     var rootStyle = document.documentElement.style;
-    if (height !== lastAppHeight) {
-      lastAppHeight = height;
-      rootStyle.setProperty("--app-height", height + "px");
-    }
-    if (top !== lastShellTop) {
-      lastShellTop = top;
-      rootStyle.setProperty("--shell-top", top + "px");
+    if (inset !== lastKeyboardInset) {
+      lastKeyboardInset = inset;
+      rootStyle.setProperty("--keyboard-inset", inset + "px");
     }
   }
 
   syncViewport();
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", syncViewport);
-    window.visualViewport.addEventListener("scroll", syncViewport);
   }
   window.addEventListener("resize", syncViewport);
   document.addEventListener("focusin", function () {
-    var active = document.activeElement;
-    var isTextInput = active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA");
-    var isTouch = ("ontouchstart" in window) ||
-      (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
-    var vv = window.visualViewport;
-    var layoutHeight = window.innerHeight;
-    var alreadyShrunk = vv && vv.height > 0 && vv.height < layoutHeight;
-    if (isTextInput && isTouch && !alreadyShrunk) {
-      var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
-      var estimatedHeight = Math.max(200, layoutHeight - estimate);
-      inputPrelifted = true;
-      preliftHeight = estimatedHeight;
-      lastAppHeight = estimatedHeight;
-      document.documentElement.style.setProperty("--app-height", estimatedHeight + "px");
-    }
     startViewportRaf();
     setTimeout(syncViewport, 250);
   });
   document.addEventListener("focusout", function () {
-    inputPrelifted = false;
-    preliftHeight = null;
     setTimeout(syncViewport, 100);
     setTimeout(stopViewportRaf, 120);
   });
@@ -266,28 +229,6 @@
   var emojiPanel = document.querySelector(".emoji-panel");
   var morePanel = document.querySelector(".more-panel");
   var inputField = document.querySelector(".input-field");
-
-  function preliftInput() {
-    var isTouch = ("ontouchstart" in window) ||
-      (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0);
-    if (!isTouch) return;
-    var vv = window.visualViewport;
-    if (vv && vv.height > 0 && vv.height < window.innerHeight) return;
-    var layoutHeight = window.innerHeight;
-    var estimate = Math.round(Math.min(layoutHeight * 0.45, 420));
-    var estimatedHeight = Math.max(200, layoutHeight - estimate);
-    var rootStyle = document.documentElement.style;
-    inputPrelifted = true;
-    preliftHeight = estimatedHeight;
-    lastAppHeight = estimatedHeight;
-    lastShellTop = 0;
-    rootStyle.setProperty("--app-height", estimatedHeight + "px");
-    rootStyle.setProperty("--shell-top", "0px");
-  }
-
-  if (inputField) {
-    inputField.addEventListener("touchstart", preliftInput, { passive: true });
-  }
 
   function closeInputPanels() {
     if (emojiPanel) emojiPanel.classList.add("is-hidden");
