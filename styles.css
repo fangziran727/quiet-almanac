@@ -137,24 +137,26 @@ button {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.42;
+  opacity: 0.32;
 }
 
 .watermark span {
   position: absolute;
-  color: #d2d5dd;
-  font-size: 15px;
-  font-weight: 500;
+  color: #d5d8df;
+  font-size: 14px;
+  font-weight: 400;
   white-space: nowrap;
   transform: rotate(-22deg);
 }
 
-.watermark span:nth-child(1) { top: 25px; right: -18px; }
-.watermark span:nth-child(2) { top: 235px; right: -35px; }
-.watermark span:nth-child(3) { top: 390px; left: -42px; }
-.watermark span:nth-child(4) { top: 545px; right: -38px; }
-.watermark span:nth-child(5) { top: 705px; left: -46px; }
-.watermark span:nth-child(6) { bottom: 58px; right: -36px; }
+.watermark span:nth-child(1) { top: 24px; right: -18px; }
+.watermark span:nth-child(2) { top: 88px; left: -42px; }
+.watermark span:nth-child(3) { top: 232px; right: -34px; }
+.watermark span:nth-child(4) { top: 296px; left: -46px; }
+.watermark span:nth-child(5) { top: 440px; right: -30px; }
+.watermark span:nth-child(6) { top: 504px; left: -44px; }
+.watermark span:nth-child(7) { top: 648px; right: -36px; }
+.watermark span:nth-child(8) { top: 712px; left: -48px; }
 
 .message-time {
   position: relative;
