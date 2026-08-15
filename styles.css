@@ -306,15 +306,35 @@ button {
 
 .emoji-panel,
 .more-panel {
-  height: 236px;
-  overflow-y: auto;
+  --panel-max: 236px;
+  max-height: 0;
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 8px;
   background: #f5f6fa;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  transition: max-height 0.28s ease, opacity 0.22s ease, padding 0.28s ease;
 }
 
-.emoji-panel {
+.more-panel {
+  --panel-max: 350px;
+  padding: 0 18px;
+}
+
+.emoji-panel.panel-open {
+  max-height: var(--panel-max);
+  overflow-y: auto;
+  opacity: 1;
   padding: 10px 8px;
+}
+
+.more-panel.panel-open {
+  max-height: var(--panel-max);
+  overflow-y: auto;
+  opacity: 1;
+  padding: 22px 18px calc(18px + env(safe-area-inset-bottom));
 }
 
 .emoji-grid {
@@ -336,11 +356,6 @@ button {
 
 .emoji-grid button:active {
   background: #eceef2;
-}
-
-.more-panel {
-  min-height: 350px;
-  padding: 22px 18px calc(18px + env(safe-area-inset-bottom));
 }
 
 .more-grid {

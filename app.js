@@ -248,17 +248,17 @@
   }
 
   function closeInputPanels() {
-    if (emojiPanel) emojiPanel.classList.add("is-hidden");
-    if (morePanel) morePanel.classList.add("is-hidden");
+    if (emojiPanel) emojiPanel.classList.remove("panel-open");
+    if (morePanel) morePanel.classList.remove("panel-open");
   }
 
   function openInputPanel(kind) {
     var target = kind === "emoji" ? emojiPanel : morePanel;
     var other = kind === "emoji" ? morePanel : emojiPanel;
     if (!target) return;
-    var opening = target.classList.contains("is-hidden");
-    if (other) other.classList.add("is-hidden");
-    target.classList.toggle("is-hidden", !opening);
+    var opening = !target.classList.contains("panel-open");
+    if (other) other.classList.remove("panel-open");
+    target.classList.toggle("panel-open", opening);
     if (opening) {
       if (document.activeElement === inputField && inputField) {
         inputField.blur();
