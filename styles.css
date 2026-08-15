@@ -62,7 +62,7 @@ button {
   display: flex;
   height: 100%;
   flex-direction: column;
-  padding-top: 54px;
+  padding-top: calc(54px + env(safe-area-inset-top));
   padding-bottom: calc(var(--keyboard-inset, 0px) + 4px);
   overflow: hidden;
   background: var(--wechat-bg);
@@ -75,8 +75,9 @@ button {
   z-index: 100;
   width: min(100vw, var(--screen-width));
   display: grid;
-  flex: 0 0 54px;
-  height: 54px;
+  flex: 0 0 calc(54px + env(safe-area-inset-top));
+  height: calc(54px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   grid-template-columns: 64px 1fr 64px;
   align-items: center;
   border-bottom: 1px solid var(--hairline);
@@ -86,7 +87,7 @@ button {
 .chat-header h1 {
   margin: 0;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
@@ -99,12 +100,28 @@ button {
 }
 
 .back-icon {
-  width: 16px;
-  height: 16px;
-  border-bottom: 3px solid #05060a;
-  border-left: 3px solid #05060a;
+  width: 13px;
+  height: 13px;
+  border-bottom: 2px solid #05060a;
+  border-left: 2px solid #05060a;
   border-radius: 2px;
   transform: rotate(45deg);
+}
+
+.unread-badge {
+  display: inline-flex;
+  min-width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: #fa5151;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .more-button {
@@ -130,7 +147,7 @@ button {
 
 .watermark {
   position: absolute;
-  top: 54px;
+  top: calc(54px + env(safe-area-inset-top));
   right: 0;
   bottom: 0;
   left: 0;
@@ -307,7 +324,6 @@ button {
 .input-panels {
   flex: 0 0 auto;
   background: #f5f6fa;
-  border-top: 1px solid #dde0e6;
 }
 
 .emoji-panel,
@@ -417,8 +433,9 @@ button {
 
 .campus-nav {
   display: grid;
-  flex: 0 0 54px;
-  height: 54px;
+  flex: 0 0 calc(54px + env(safe-area-inset-top));
+  height: calc(54px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   grid-template-columns: 48px 48px 1fr 48px;
   align-items: center;
   border-bottom: 1px solid #e6e7eb;
