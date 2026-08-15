@@ -314,7 +314,7 @@
 
   if (/[?&]debug=1/.test(window.location.search)) {
     var debugEl = document.createElement("div");
-    debugEl.style.cssText = "position:fixed;top:60px;left:8px;z-index:99999;padding:6px 8px;border-radius:4px;background:rgba(0,0,0,.78);color:#fff;font:11px/1.4 monospace;pointer-events:none;";
+    debugEl.style.cssText = "position:fixed;top:calc(var(--shell-top, 0px) + 60px);left:8px;z-index:99999;padding:6px 8px;border-radius:4px;background:rgba(0,0,0,.78);color:#fff;font:11px/1.4 monospace;pointer-events:none;";
     debugEl.textContent = "debug";
     document.body.appendChild(debugEl);
     var minVvTop = Infinity;
