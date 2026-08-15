@@ -143,7 +143,7 @@ button {
 .watermark span {
   position: absolute;
   color: #d5d8df;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
   transform: rotate(-22deg);
