@@ -516,7 +516,7 @@ button {
   padding-right: 0;
   font-size: 0;
   line-height: 0;
-  background: url("./assets/more_icon.svg?v=24") center / 20px 20px no-repeat;
+  background: url("./assets/more_icon.svg?v=24") center / 24px 24px no-repeat;
 }
 
 .sysu-brand {
@@ -735,6 +735,7 @@ button {
 
 .quick-form {
   display: grid;
+  max-width: 280px;
   gap: 38px;
   margin-top: 24px;
 }
@@ -763,9 +764,9 @@ button {
   content: "";
   width: 0;
   height: 0;
-  border-top: 7px solid #8a8a8a;
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
+  border-top: 5px solid #8a8a8a;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
 }
 
 .date-field {
@@ -781,11 +782,11 @@ button {
 
 .calendar-icon {
   position: relative;
-  width: 27px;
-  height: 28px;
+  width: 20px;
+  height: 21px;
   margin-left: 4px;
-  border: 4px solid #737373;
-  border-top-width: 8px;
+  border: 3px solid #737373;
+  border-top-width: 6px;
   border-radius: 2px;
 }
 
@@ -793,24 +794,24 @@ button {
 .calendar-icon::after {
   content: "";
   position: absolute;
-  top: -14px;
-  width: 5px;
-  height: 10px;
+  top: -12px;
+  width: 4px;
+  height: 8px;
   border-radius: 2px;
   background: #737373;
 }
 
 .calendar-icon::before {
-  left: 3px;
+  left: 2px;
 }
 
 .calendar-icon::after {
-  right: 3px;
+  right: 2px;
 }
 
 .calendar-icon {
   background:
-    linear-gradient(#737373, #737373) 7px 13px / 9px 5px no-repeat,
+    linear-gradient(#737373, #737373) 5px 10px / 7px 4px no-repeat,
     #ffffff;
 }
 
