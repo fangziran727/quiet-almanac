@@ -450,7 +450,7 @@ button {
   left: 0;
   margin: 0;
   overflow: hidden;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1;
   text-align: center;
@@ -496,10 +496,10 @@ button {
 .campus-close::after {
   content: "";
   position: absolute;
-  top: 21px;
-  left: 12px;
-  width: 16px;
-  height: 2.5px;
+  top: 20px;
+  left: 8px;
+  width: 20px;
+  height: 3px;
   border-radius: 2px;
   background: #05060a;
 }
@@ -623,14 +623,14 @@ button {
   left: 0;
   display: inline-flex;
   min-width: auto;
-  height: 52px;
+  height: 40px;
   align-items: center;
-  gap: 18px;
-  padding: 0 20px;
+  gap: 10px;
+  padding: 0 12px 0 10px;
   background: rgba(255, 255, 255, 0.76);
   color: #00723f;
-  font-size: 17px;
-  font-weight: 900;
+  font-size: 16px;
+  font-weight: 400;
   line-height: 1;
   white-space: nowrap;
 }
@@ -638,9 +638,9 @@ button {
 .campus-card b {
   position: relative;
   display: inline-block;
-  flex: 0 0 30px;
-  width: 30px;
-  height: 18px;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 14px;
   color: transparent;
   font-size: 0;
   line-height: 0;
@@ -649,23 +649,23 @@ button {
 .campus-card b::before {
   content: "";
   position: absolute;
-  top: 8px;
+  top: 6px;
   left: 0;
-  width: 28px;
-  height: 3px;
-  border-radius: 3px;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
   background: #00723f;
 }
 
 .campus-card b::after {
   content: "";
   position: absolute;
-  top: 3px;
+  top: 2px;
   right: 0;
-  width: 10px;
-  height: 10px;
-  border-top: 3px solid #00723f;
-  border-right: 3px solid #00723f;
+  width: 8px;
+  height: 8px;
+  border-top: 2.5px solid #00723f;
+  border-right: 2.5px solid #00723f;
   transform: rotate(45deg);
 }
 
@@ -943,7 +943,7 @@ button {
   }
 
   .campus-nav h1 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .sysu-brand {
@@ -964,7 +964,7 @@ button {
   }
 
   .campus-card span {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .quick-panel h2,

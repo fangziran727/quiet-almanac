@@ -129,6 +129,7 @@
   function showCampusScreen(updateHash) {
     chatScreen.classList.add("is-hidden");
     campusScreen.classList.remove("is-hidden");
+    setThemeColor("#ffffff");
     campusScreen.querySelector(".campus-content").scrollTop = 0;
     if (updateHash !== false && window.location.hash !== "#campus") {
       window.location.hash = "campus";
@@ -138,6 +139,7 @@
   function showChatScreen() {
     campusScreen.classList.add("is-hidden");
     chatScreen.classList.remove("is-hidden");
+    setThemeColor("#f0f1f5");
     if (window.location.hash === "#campus") {
       history.replaceState(null, "", window.location.pathname + window.location.search);
     }
@@ -146,6 +148,15 @@
   document.querySelectorAll("[data-return-chat]").forEach(function (button) {
     button.addEventListener("click", showChatScreen);
   });
+
+  function setThemeColor(color) {
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute("content", color);
+    }
+  }
+
+  setThemeColor("#f0f1f5");
 
   function blockPinchZoom() {
     document.addEventListener("gesturestart", function (event) {
