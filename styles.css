@@ -516,7 +516,7 @@ button {
   padding-right: 0;
   font-size: 0;
   line-height: 0;
-  background: url("./assets/more_icon.svg?v=24") center / 16px 16px no-repeat;
+  background: url("./assets/more_icon.svg?v=24") center / 20px 20px no-repeat;
 }
 
 .sysu-brand {
@@ -586,7 +586,7 @@ button {
 .campus-panel h2 {
   margin: 0 0 18px;
   color: #00723f;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 900;
   line-height: 1;
 }
@@ -728,7 +728,7 @@ button {
 .notice-section h2 {
   margin: 0;
   color: #00723f;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 900;
   line-height: 1;
 }
@@ -747,7 +747,7 @@ button {
   align-items: center;
   justify-content: space-between;
   border-radius: 4px;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1;
 }
 
@@ -819,7 +819,7 @@ button {
   border: 0;
   color: #a3a3a3;
   background: #dfdfdf;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -831,7 +831,7 @@ button {
 .reservation-summary p {
   margin: 34px 0 0;
   color: #252525;
-  font-size: 17px;
+  font-size: 15px;
   text-align: center;
 }
 
@@ -840,7 +840,7 @@ button {
   display: block;
   margin-top: 25px;
   color: #00723f;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
   text-align: right;
   text-decoration: none;
@@ -866,14 +866,14 @@ button {
   border-radius: 4px;
   background: #ffffff;
   color: #333333;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.45;
   text-decoration: none;
 }
 
 .notice-list b {
   color: #00723f;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 500;
   line-height: 1;
   text-align: right;
@@ -888,7 +888,7 @@ button {
 
 .campus-footer h2 {
   margin: 0 0 15px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
   line-height: 1.2;
 }
@@ -896,7 +896,7 @@ button {
 .campus-footer p {
   margin: 0;
   color: #eeeeee;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -970,11 +970,11 @@ button {
   .quick-panel h2,
   .reservation-summary h2,
   .notice-section h2 {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .select-field,
   .reserve-button {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
