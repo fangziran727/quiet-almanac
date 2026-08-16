@@ -450,8 +450,8 @@ button {
   left: 0;
   margin: 0;
   overflow: hidden;
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 17px;
+  font-weight: 600;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
@@ -570,14 +570,14 @@ button {
 .campus-content {
   flex: 1;
   min-height: 0;
-  padding: 18px 17px 24px;
+  padding: 14px 17px 20px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
 }
 
 .campus-panel {
-  padding: 23px 18px 25px;
+  padding: 16px 16px 18px;
   border-radius: 13px;
   background: #ffffff;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
@@ -586,15 +586,15 @@ button {
 .campus-panel h2 {
   margin: 0 0 18px;
   color: #00723f;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 900;
   line-height: 1;
 }
 
 .campus-list {
   display: grid;
-  gap: 15px;
-  padding: 0 12px;
+  gap: 10px;
+  padding: 0 10px;
 }
 
 .campus-card {
@@ -630,7 +630,7 @@ button {
   background: rgba(255, 255, 255, 0.76);
   color: #00723f;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 900;
   line-height: 1;
   white-space: nowrap;
 }
@@ -943,7 +943,7 @@ button {
   }
 
   .campus-nav h1 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .sysu-brand {
