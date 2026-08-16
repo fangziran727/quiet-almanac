@@ -161,7 +161,7 @@ button {
 .watermark span {
   position: absolute;
   color: #c0c3cb;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
   white-space: nowrap;
   transform: rotate(-22deg);
@@ -434,20 +434,23 @@ button {
 }
 
 .campus-nav {
-  display: grid;
+  position: relative;
+  display: flex;
   flex: 0 0 calc(54px + env(safe-area-inset-top));
   height: calc(54px + env(safe-area-inset-top));
   padding-top: env(safe-area-inset-top);
-  grid-template-columns: 48px 48px 1fr 48px;
   align-items: center;
   border-bottom: 1px solid #e6e7eb;
   background: #ffffff;
 }
 
 .campus-nav h1 {
+  position: absolute;
+  right: 0;
+  left: 0;
   margin: 0;
   overflow: hidden;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 1;
   text-align: center;
@@ -458,19 +461,33 @@ button {
 .campus-close,
 .campus-more {
   position: relative;
-  width: 48px;
-  height: 54px;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 44px;
+}
+
+.campus-back {
+  margin-left: 10px;
+}
+
+.campus-close {
+  margin-left: 4px;
+}
+
+.campus-more {
+  margin-left: auto;
+  margin-right: 12px;
 }
 
 .campus-back::before {
   content: "";
   position: absolute;
-  top: 20px;
-  left: 16px;
-  width: 13px;
-  height: 13px;
-  border-bottom: 3px solid #05060a;
-  border-left: 3px solid #05060a;
+  top: 16px;
+  left: 12px;
+  width: 11px;
+  height: 11px;
+  border-bottom: 2.5px solid #05060a;
+  border-left: 2.5px solid #05060a;
   border-radius: 2px;
   transform: rotate(45deg);
 }
@@ -479,10 +496,10 @@ button {
 .campus-close::after {
   content: "";
   position: absolute;
-  top: 26px;
-  left: 14px;
-  width: 20px;
-  height: 3px;
+  top: 21px;
+  left: 12px;
+  width: 16px;
+  height: 2.5px;
   border-radius: 2px;
   background: #05060a;
 }
@@ -496,33 +513,32 @@ button {
 }
 
 .campus-more {
-  justify-self: end;
-  padding-right: 14px;
+  padding-right: 0;
   font-size: 0;
   line-height: 0;
-  background: url("./assets/more_icon.svg?v=24") center right 14px / 18px 18px no-repeat;
+  background: url("./assets/more_icon.svg?v=24") center / 16px 16px no-repeat;
 }
 
 .sysu-brand {
   display: flex;
-  flex: 0 0 66px;
+  flex: 0 0 52px;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  padding: 0 22px;
+  padding: 0 18px;
   background: #00723f;
 }
 
 .sysu-brand img {
-  width: 153px;
+  width: 140px;
   height: auto;
-  filter: brightness(0) invert(1);
 }
 
 .brand-actions {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
+  margin-right: 6px;
   color: #00723f;
   white-space: nowrap;
 }
@@ -530,23 +546,23 @@ button {
 .account-pill,
 .logout-pill {
   display: inline-flex;
-  height: 35px;
+  height: 30px;
   align-items: center;
   justify-content: center;
   text-align: center;
   border-radius: 22px;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1;
   white-space: nowrap;
 }
 
 .account-pill {
-  width: 87px;
+  width: 78px;
   background: #ffffff;
 }
 
 .logout-pill {
-  width: 63px;
+  width: 56px;
   border: 1.5px solid #ffffff;
   color: #ffffff;
 }
@@ -927,7 +943,7 @@ button {
   }
 
   .campus-nav h1 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .sysu-brand {
@@ -935,12 +951,12 @@ button {
   }
 
   .sysu-brand img {
-    width: 132px;
+    width: 120px;
   }
 
   .account-pill,
   .logout-pill {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .campus-card {
