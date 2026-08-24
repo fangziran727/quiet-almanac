@@ -25,6 +25,14 @@
     return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / MINUTES_PER_DAY);
   }
 
+  // Swimming pool is closed for one week starting 2026-08-22.
+  var POOL_CLOSURE_START_SERIAL = daySerial(new Date(2026, 7, 22));
+  var POOL_CLOSURE_END_SERIAL = POOL_CLOSURE_START_SERIAL + 7;
+  var REMOVED_RESERVATION_SERIALS = [
+    daySerial(new Date(2026, 7, 22)),
+    daySerial(new Date(2026, 7, 23))
+  ];
+
   function pseudoRandom(date, salt) {
     return (daySerial(date) * 37 + salt * 101 + 23) % 997;
   }
@@ -99,11 +107,19 @@
   }
 
   function dailyMessages(date) {
+    var serial = daySerial(date);
+    if (REMOVED_RESERVATION_SERIALS.indexOf(serial) !== -1) {
+      return [];
+    }
     var sendTimes = dailySendTimes(date);
-    return [
+    var messages = [
       { venue: "深圳校区游泳池-场地1", date: date, reservationTime: "16:30", sentAt: sendTimes[0] },
       { venue: "深圳校区健身房-场地1", date: date, reservationTime: "16:00", sentAt: sendTimes[1] }
     ];
+    var poolPaused = serial >= POOL_CLOSURE_START_SERIAL && serial < POOL_CLOSURE_END_SERIAL;
+    return messages.filter(function (message) {
+      return !(poolPaused && message.venue.indexOf("游泳池") !== -1);
+    });
   }
 
   function renderMessages() {
