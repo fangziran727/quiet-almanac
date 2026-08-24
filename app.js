@@ -157,6 +157,7 @@
     if (window.location.hash === "#campus") {
       history.replaceState(null, "", window.location.pathname + window.location.search);
     }
+    scheduleScrollToBottom();
   }
 
   document.querySelectorAll("[data-return-chat]").forEach(function (button) {
@@ -433,6 +434,7 @@
 
   blockPinchZoom();
   renderMessages();
+  scheduleScrollToBottom();
 
   if (window.location.hash === "#campus") {
     showCampusScreen(false);
