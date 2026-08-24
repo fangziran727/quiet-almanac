@@ -4,6 +4,7 @@
   var chatScreen = document.getElementById("chatScreen");
   var campusScreen = document.getElementById("campusScreen");
   var MINUTES_PER_DAY = 24 * 60 * 60 * 1000;
+  var HISTORY_DAYS = 7;
 
   function pad(value) {
     return String(value).padStart(2, "0");
@@ -124,13 +125,10 @@
 
   function renderMessages() {
     var today = new Date();
-    var todayOnly = shiftedDate(today, 0);
-    var messageGroups = [
-      shiftedDate(today, -3),
-      shiftedDate(today, -2),
-      shiftedDate(today, -1),
-      todayOnly
-    ];
+    var messageGroups = [];
+    for (var offset = -HISTORY_DAYS; offset <= 0; offset += 1) {
+      messageGroups.push(shiftedDate(today, offset));
+    }
 
     cardsRoot.textContent = "";
 
