@@ -30,9 +30,13 @@
   var POOL_CLOSURE_START_SERIAL = daySerial(new Date(2026, 7, 22));
   var POOL_CLOSURE_END_SERIAL = POOL_CLOSURE_START_SERIAL + 7;
   var REMOVED_RESERVATION_SERIALS = [
-    daySerial(new Date(2026, 7, 22)),
-    daySerial(new Date(2026, 7, 23))
+    daySerial(new Date(2026, 8, 20)),
+    daySerial(new Date(2026, 8, 21))
   ];
+  var REMOVED_MESSAGE_SERIALS = [
+    daySerial(new Date(2026, 8, 22))
+  ];
+  var ADDED_GYM_RESERVATION_SERIAL = daySerial(new Date(2026, 8, 22));
 
   function pseudoRandom(date, salt) {
     return (daySerial(date) * 37 + salt * 101 + 23) % 997;
@@ -117,8 +121,20 @@
       { venue: "深圳校区游泳池-场地1", date: date, reservationTime: "16:30", sentAt: sendTimes[0] },
       { venue: "深圳校区健身房-场地1", date: date, reservationTime: "16:00", sentAt: sendTimes[1] }
     ];
+    if (serial === ADDED_GYM_RESERVATION_SERIAL) {
+      messages.push({
+        venue: "深圳校区健身房-场地1",
+        date: date,
+        reservationTime: "18:00",
+        sentAt: "08:03",
+        messageDate: new Date(2026, 8, 20)
+      });
+    }
     var poolPaused = serial >= POOL_CLOSURE_START_SERIAL && serial < POOL_CLOSURE_END_SERIAL;
     return messages.filter(function (message) {
+      if (REMOVED_MESSAGE_SERIALS.indexOf(serial) !== -1 && !message.messageDate) {
+        return false;
+      }
       return !(poolPaused && message.venue.indexOf("游泳池") !== -1);
     });
   }
@@ -134,7 +150,7 @@
 
     messageGroups.forEach(function (date) {
       dailyMessages(date).forEach(function (message) {
-        appendTimeLabel(chatTimeLabel(message.date, message.sentAt));
+        appendTimeLabel(chatTimeLabel(message.messageDate || message.date, message.sentAt));
         appendMessage(message);
       });
     });
